@@ -33,7 +33,7 @@ cat parse_json.py
 	print str
 	obj = json.loads(str)
 	print json.dumps(obj,indent=4)
-
+		aaa
 
 执行结果：
 

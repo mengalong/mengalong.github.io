@@ -35,6 +35,7 @@ cat parse_json.py
 	print json.dumps(obj,indent=4)
 
 ```
+
 执行结果：
 
 ```
@@ -45,4 +46,5 @@ cat parse_json.py
     	“b”: “2″
 	}
 ```
+
 enjoy it~

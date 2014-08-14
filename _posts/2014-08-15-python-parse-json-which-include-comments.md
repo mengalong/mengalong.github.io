@@ -26,7 +26,7 @@ cat json.file:
 
 cat parse_json.py
 
-```
+<!-- lang:python-->
 	#!/usr/bin/env python
 	import jsonfh = open("json.file", "r")
 	str = json.dumps(eval(fh.read()))
@@ -34,17 +34,15 @@ cat parse_json.py
 	obj = json.loads(str)
 	print json.dumps(obj,indent=4)
 
-```
 
 执行结果：
 
-```
+<!-- lang:python-->
 	python parse_json.py 
 	{“a”: “1″, “b”: “2″}
 	{
     	“a”: “1″, 
     	“b”: “2″
 	}
-```
 
 enjoy it~

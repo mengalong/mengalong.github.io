@@ -1,6 +1,6 @@
 ---
 layout: about
-title : 关于
+title : about
 group: meta
 ---
 {% include JB/setup %}

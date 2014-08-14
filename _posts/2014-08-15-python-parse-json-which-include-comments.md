@@ -6,6 +6,7 @@ tags : [python,json]
 ---
 {% include JB/setup %}
 
+
 #python 解析包含注释的json文件
 
 ## 问题
@@ -22,3 +23,26 @@ cat json.file:
 		"a" : "1",#this is comment        
 		"b" : "2", 
 	}
+
+cat parse_json.py
+
+```
+	#!/usr/bin/env python
+	import jsonfh = open("json.file", "r")
+	str = json.dumps(eval(fh.read()))
+	print str
+	obj = json.loads(str)
+	print json.dumps(obj,indent=4)
+
+```
+执行结果：
+
+```
+	python parse_json.py 
+	{“a”: “1″, “b”: “2″}
+	{
+    	“a”: “1″, 
+    	“b”: “2″
+	}
+```
+enjoy it~

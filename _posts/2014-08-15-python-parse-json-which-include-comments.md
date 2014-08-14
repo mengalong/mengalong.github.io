@@ -16,10 +16,9 @@ Python 当前有默认的json包可以用来解析json文本，如果json文本�
 
 cat json.file:
 
-`
-{        
-	#this is comment        
-	"a" : "1",#this is comment        
-	"b" : "2", 
-}
-`
+<!-- lang:python-->
+	{        
+		#this is comment        
+		"a" : "1",#this is comment        
+		"b" : "2", 
+	}

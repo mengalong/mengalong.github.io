@@ -1,10 +1,7 @@
 ---
-layout: page
-title : mengalong
-header : Post Archive
-group: navigation
+layout: index
+title: index
+tagline: 
 ---
 {% include JB/setup %}
 
-{% assign posts_collate = site.posts %}
-{% include JB/posts_collate %}

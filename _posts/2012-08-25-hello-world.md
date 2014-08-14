@@ -10,4 +10,3 @@ tags : [intro, beginner, jekyll, tutorial]
 
 #hello world
 - hello everyone
-<p>{{ page.date | date_to_string }}</p>

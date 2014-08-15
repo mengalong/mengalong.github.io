@@ -10,7 +10,7 @@ tags : [linux,command,free]
 
 转载自:[http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html](http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html)
 
-![xx](/public/img/tin-can-phone.jpg)
+![xx](/public/img/tin-can-phone.png)
 
 解释一下Linux上free命令的输出。
 

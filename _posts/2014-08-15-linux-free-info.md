@@ -10,6 +10,8 @@ tags : [linux,command,free]
 
 转载自:[http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html](http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html)
 
+![xx](/public/img/tin-can-phone.jpg)
+
 解释一下Linux上free命令的输出。
 
 下面是free的运行结果，一共有4行。为了方便说明，我加上了列号。这样可以把free的输出看成一个二维数组FO(Free Output)。例如：

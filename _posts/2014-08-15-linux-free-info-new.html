@@ -1,0 +1,263 @@
+---
+layout: post
+category : Linux
+tags : [linux,command,free]
+---
+{% include JB/setup %}
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>Linux上的free命令详解</title>
+
+</head>
+<body>
+<h1>Linux上的free命令详解</h1>
+
+<p>转载自：http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html</p>
+
+<p>解释一下Linux上free命令的输出。</p>
+
+<p>　　下面是free的运行结果，一共有4行。为了方便说明，我加上了列号。这样可以把free的输出看成一个二维数组FO(Free Output)。例如：</p>
+
+<ul>
+<li>FO[2][1] = 24677460</li>
+<li>FO[3][2] = 10321516</li>
+</ul>
+
+
+<pre><code>              1           2          3        4         5           6   
+1             total       used       free     shared    buffers     cached
+2 Mem:         48263      12178      36084          0       9711        710
+3 -/+ buffers/cache:       1756      46506
+4 Swap:            0          0          0
+</code></pre>
+
+<p>free的输出一共有四行，第四行为交换区的信息，分别是交换的总量（total），使用量（used）和有多少空闲的交换区（free），这个比较清楚，不说太多。</p>
+
+<p>free输出地第二行和第三行是比较让人迷惑的。这两行都是说明内存使用情况的。第一列是总量（total），第二列是使用量（used），第三列是可用量（free）。</p>
+
+<p>第一行的输出时从操作系统（OS）来看的。也就是说，从OS的角度来看，计算机上一共有:</p>
+
+<ul>
+<li>24677460KB（缺省时free的单位为KB）物理内存，即FO[2][1]；</li>
+<li>在这些物理内存中有23276064KB（即FO[2][2]）被使用了；</li>
+<li>还用1401396KB（即FO[2][3]）是可用的；</li>
+</ul>
+
+
+<p>这里得到第一个等式：</p>
+
+<ul>
+<li>FO[2][1] = FO[2][2] + FO[2][3]</li>
+</ul>
+
+
+<p>FO[2][4]表示被几个进程共享的内存的，现在已经deprecated，其值总是0（当然在一些系统上也可能不是0，主要取决于free命令是怎么实现的）。</p>
+
+<p>FO[2][5]表示被OS buffer住的内存。FO[2][6]表示被OS cache的内存。在有些时候buffer和cache这两个词经常混用。不过在一些比较低层的软件里是要区分这两个词的，看老外的洋文:</p>
+
+<ul>
+<li>A buffer is something that has yet to be "written" to disk.</li>
+<li>A cache is something that has been "read" from the disk and stored for later use.</li>
+</ul>
+
+
+<p>也就是说buffer是用于存放要输出到disk（块设备）的数据的，而cache是存放从disk上读出的数据。这二者是为了提高IO性能的，并由OS管理。</p>
+
+<p>Linux和其他成熟的操作系统（例如windows），为了提高IO read的性能，总是要多cache一些数据，这也就是为什么FO[2][6]（cached memory）比较大，而FO[2][3]比较小的原因。我们可以做一个简单的测试:</p>
+
+<ol>
+<li>释放掉被系统cache占用的数据；</li>
+</ol>
+
+
+<pre><code>echo 3&gt;/proc/sys/vm/drop_caches
+</code></pre>
+
+<ol>
+<li>读一个大文件，并记录时间；</li>
+<li>关闭该文件；</li>
+<li>重读这个大文件，并记录时间；</li>
+</ol>
+
+
+<p>第二次读应该比第一次快很多。原来我做过一个BerkeleyDB的读操作，大概要读5G的文件，几千万条记录。在我的环境上，第二次读比第一次大概可以快9倍左右。</p>
+
+<p>　　free输出的第二行是从一个应用程序的角度看系统内存的使用情况。</p>
+
+<ul>
+<li>对于FO[3][2]，即-buffers/cache，表示一个应用程序认为系统被用掉多少内存；</li>
+<li>对于FO[3][3]，即+buffers/cache，表示一个应用程序认为系统还有多少内存；</li>
+</ul>
+
+
+<p>因为被系统cache和buffer占用的内存可以被快速回收，所以通常FO[3][3]比FO[2][3]会大很多。</p>
+
+<p>这里还用两个等式：</p>
+
+<ul>
+<li>FO[3][2] = FO[2][2] - FO[2][5] - FO[2][6]</li>
+<li>FO[3][3] = FO[2][3] + FO[2][5] + FO[2][6]
+这二者都不难理解。</li>
+</ul>
+
+
+<p>　　free命令由procps.*.rpm提供（在Redhat系列的OS上）。free命令的所有输出值都是从/proc/meminfo中读出的。</p>
+
+<p>在系统上可能有meminfo(2)这个函数，它就是为了解析/proc/meminfo的。procps这个包自己实现了meminfo()这个函数。可以下载一个procps的tar包看看具体实现，现在最新版式3.2.8。</p>
+</body>
+</html>

@@ -7,9 +7,12 @@ tags : [linux,command,free]
 
 
 #Linux上的free命令详解
+
+转载自:[http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html](http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html)
+
 解释一下Linux上free命令的输出。
 
-　　下面是free的运行结果，一共有4行。为了方便说明，我加上了列号。这样可以把free的输出看成一个二维数组FO(Free Output)。例如：
+下面是free的运行结果，一共有4行。为了方便说明，我加上了列号。这样可以把free的输出看成一个二维数组FO(Free Output)。例如：
 
 * FO[2][1] = 24677460
 * FO[3][2] = 10321516

@@ -20,6 +20,12 @@ tags : [linux,command,free]
 * FO[3][2] = 10321516
 
 <pre><code>
+                   1          2          3          4          5          6
+1              total       used       free     shared    buffers     cached
+2 Mem:      24677460   23276064    1401396          0     870540   12084008
+3 -/+ buffers/cache:   10321516   14355944
+4 Swap:     25151484     224188   24927296
+
               1           2          3        4         5           6   
 1             total       used       free     shared    buffers     cached
 2 Mem:         48263      12178      36084          0       9711        710

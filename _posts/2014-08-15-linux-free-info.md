@@ -26,11 +26,6 @@ tags : [linux,command,free]
 3 -/+ buffers/cache:   10321516   14355944
 4 Swap:     25151484     224188   24927296
 
-              1           2          3        4         5           6   
-1             total       used       free     shared    buffers     cached
-2 Mem:         48263      12178      36084          0       9711        710
-3 -/+ buffers/cache:       1756      46506
-4 Swap:            0          0          0
 </code></pre>
 
 free的输出一共有四行，第四行为交换区的信息，分别是交换的总量（total），使用量（used）和有多少空闲的交换区（free），这个比较清楚，不说太多。

@@ -29,4 +29,6 @@ permalink: /about/
     {% endfor %}
 </div>
 
-## 本博客Fork于[@mzlogin](https://github.com/mzlogin/mzlogin.github.io)
+## 来源
+本博客Fork于[@mzlogin](https://github.com/mzlogin/mzlogin.github.io)
+向作者致谢

@@ -7,10 +7,9 @@ tags : [linux,vim]
 
 如何使用Vundle来管理vim插件.
 
-1. 安装
-<pre><code>
 1.  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 2. 配置.vimrc,在.vimrc文件开始加入如下内容
+<pre></code>
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -55,7 +54,4 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 </code></pre>
-2. 使用：
-<pre><code>
-1. 在vim中执行 :PluginInstall， 即可自动开始安装 .vimrc 中配置的所有插件
-</code></pre>
+3. 使用：在vim中执行 :PluginInstall， 即可自动开始安装 .vimrc 中配置的所有插件

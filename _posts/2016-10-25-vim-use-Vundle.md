@@ -1,9 +1,10 @@
 ---
 layout: post
-title : 如何使用Vundle来管理vim插件.
+title: 如何使用Vundle来管理vim插件.
 category : Linux
 tags : [linux,vim]
 ---
+
 如何使用Vundle来管理vim插件.
 
 1. 安装

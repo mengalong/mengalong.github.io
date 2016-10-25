@@ -1,5 +1,6 @@
 ---
 layout: post
+title: mongodb中如何插入简体中文
 category : Python
 tagline: "tag line"
 tags : [python,json]
@@ -7,7 +8,7 @@ tags : [python,json]
 
 
 
-#mongodb insert simplified Chinese
+# mongodb insert simplified Chinese
 
 ## 问题
 

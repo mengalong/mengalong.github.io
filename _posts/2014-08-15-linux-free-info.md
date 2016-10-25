@@ -7,7 +7,7 @@ title: Linux上的free命令详解
 ---
 
 
-#Linux上的free命令详解
+# Linux上的free命令详解
 
 转载自:[http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html](http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html)
 

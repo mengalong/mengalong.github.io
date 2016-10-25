@@ -1,6 +1,5 @@
 ---
 layout: post
-title: mongodb insert simplified Chinese
 category : Python
 tagline: "tag line"
 tags : [python,json]
@@ -8,7 +7,7 @@ tags : [python,json]
 
 
 
-# mongodb insert simplified Chinese
+#mongodb insert simplified Chinese
 
 ## 问题
 

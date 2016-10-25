@@ -54,4 +54,4 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 </code></pre>
-3. 使用：在vim中执行 :PluginInstall， 即可自动开始安装 .vimrc 中配置的所有插件
+3.  使用：在vim中执行 :PluginInstall， 即可自动开始安装 .vimrc 中配置的所有插件

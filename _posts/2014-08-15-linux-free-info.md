@@ -1,6 +1,6 @@
 ---
-title:Linux free命令详解
 layout: post
+title:Linux free命令详解
 category : Linux
 tags : [linux,command,free]
 ---

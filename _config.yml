@@ -26,11 +26,10 @@ JB :
 # presonal config
 title: MengALong
 description: Talk is cheap.Show me the code.
-author: 
-    name : mengalong
-    email: alongmeng@gmail.com
-    github: mengalong
-    twitter : mengalong
+author: mengalong
+email: alongmeng@gmail.com
+github: mengalong
+twitter : mengalong
 
 config:
   js_dir:

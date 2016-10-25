@@ -8,7 +8,7 @@ tags : [python,json]
 
 
 
-#mongodb insert simplified Chinese
+# mongodb insert simplified Chinese
 
 ## 问题
 

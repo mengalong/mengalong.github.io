@@ -2,6 +2,7 @@
 layout: post
 category : Linux
 tags : [linux,command,free]
+title: Linux上的free命令详解
 ---
 
 

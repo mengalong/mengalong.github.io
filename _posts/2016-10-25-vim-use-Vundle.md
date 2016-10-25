@@ -3,8 +3,8 @@ layout: post
 category : Linux
 tags : [linux,vim]
 ---
+如何使用Vundle来管理vim插件.
 
-#vim 使用Vundle来管理插件
 1. 安装
 <pre><code>
 1.  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim

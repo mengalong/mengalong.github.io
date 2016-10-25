@@ -1,5 +1,6 @@
 ---
 layout: post
+title: Linux上的free命令详解
 category : Linux
 tags : [linux,command,free]
 title: Linux上的free命令详解

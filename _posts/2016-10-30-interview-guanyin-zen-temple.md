@@ -11,5 +11,5 @@ tags : [生活,随笔,哲理]
 的历史。寺中有一棵千年古银杏树，据传是唐太宗手植，距今也约莫1400年。
 ![观音寺](/public/img/guanyin-zen-temple.jpeg)
 观音禅寺
-![千年银杏](/public/img/qiannian-gushu.jpeg)
+![千年银杏](/public/img/qiannian-gushu_meitu_1.jpg)
 千年银杏

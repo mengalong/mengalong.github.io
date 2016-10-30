@@ -9,7 +9,7 @@ tags : [linux,vim]
 
 1. git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 2. 配置.vimrc,在.vimrc文件开始加入如下内容
-<pre></code>
+<pre><code>
 set nocompatible              " be iMproved, required
 filetype off                  " required
 

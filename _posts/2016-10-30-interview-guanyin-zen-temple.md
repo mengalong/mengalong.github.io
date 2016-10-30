@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: 念佛为谁,照顾话头

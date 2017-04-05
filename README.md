@@ -1,4 +1,7 @@
+# 个人博客
 
-本博客模板fork自:https://github.com/mzlogin/mzlogin.github.io
+[mengalong.github.io](http://mengalong.github.io/)
 
-详细内容可以参见源博客
+# 模板来源：
+
+[https://github.com/mengalong/mzlogin.github.io](https://github.com/mengalong/mzlogin.github.io)

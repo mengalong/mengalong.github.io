@@ -2,7 +2,7 @@
 layout: post
 title: 解决review.openstack.org:29418 被墙
 category : OpenStack
-tags : [OpenStack, gitreview, review.openstack.org]
+tags : [OpenStack, gitreview]
 ---
 
 

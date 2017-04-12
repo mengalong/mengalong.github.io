@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 向OpenStack社区提交代码经验
+title: 向OpenStack社区提交代码的经验
 category : OpenStack
 tags : [OpenStack, tooz]
 ---
 
-# 向OpenStack社区提交代码经验
+# 向OpenStack社区提交代码的经验
 最近给OpenStack的一个子项目tooz提交了一个patch，在和社区人沟通的过程中，看到了他们精益求精
 
 的态度同时也学到了不少内容，这里做个简单的记录

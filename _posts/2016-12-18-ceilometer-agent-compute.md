@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ceilometer 代码分析(一) - agent-compute
-category : 生活
+category : OpenStack
 tags : [ceilometer,agent-compute,compute,代码分析]
 ---
 

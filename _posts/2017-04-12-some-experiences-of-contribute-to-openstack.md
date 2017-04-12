@@ -29,14 +29,14 @@ heartbeat()功能.
 
 ### Version1:
 
-####基本思路:
+#### 基本思路:
 1. 增加timeout参数，用来控制一个member的生命周期
 2. 在join_group的时候，增加 heartbeat_on 参数，用来记录每次heartbeat的时间
 3. 增加heartbeat()函数，每次执行heartbeat的时候，修改heartbeat_on的时间戳
 4. 修改get_members()函数，每次比较heartbeat_on的时间和当前时间之间的差值记为delta_second
    如果delta_second > timeout, 则认为这个member已经死掉了
 
-####具体修改点:
+#### 具体修改点:
 1. 在 \_\_init\_\_ 方法中增加了timeout参数，用来控制单个member的失效周期
 ```cython
         self.timeout = int(options.get('timeout', ['10'])[0])

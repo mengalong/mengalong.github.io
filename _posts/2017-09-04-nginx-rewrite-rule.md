@@ -20,3 +20,10 @@ tags : [Nginx]
                 rewrite ^(.*)$ http://www.baidu.com permanent;
         }
 ```
+
+* 规则3：根据正则表达式获取url中的指定参数
+```
+        location ~ .*/mengalong/t/d/shuangyi_user.apk$ {
+                rewrite ^/mengalong/(t.*)/(shuangyi.*)$ http://www.baidu.com/s?wd=$1_$2 permanent;
+        }
+```

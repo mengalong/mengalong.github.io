@@ -7,7 +7,7 @@ tags : [Linux]
 
 # mac下sed -i参数: command a expects \ followed by text
 
-* mac下想要使用-i参数直接替换文件中的内容，使用的命令为：
+mac下想要使用-i参数直接替换文件中的内容，使用的命令为：
 ```
 sed -i 's/source-string/dest-string/g' urfile
 ```

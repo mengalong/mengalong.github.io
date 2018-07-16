@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Gnocchi+keystone认证失败
-category : Openstack
+category : OpenStack
 tags : [Openstack|Gnocchi]
 ---
 

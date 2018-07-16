@@ -2,7 +2,7 @@
 layout: post
 title: Gnocchi+keystone认证失败
 category : OpenStack
-tags : [Openstack|Gnocchi]
+tags : [OpenStack|Gnocchi]
 ---
 
 # gnocchi 使用keystone认证时提示认证失败

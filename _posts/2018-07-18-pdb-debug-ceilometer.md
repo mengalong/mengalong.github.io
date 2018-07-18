@@ -44,7 +44,6 @@ class ForkedPdb(pdb.Pdb):
         finally:
             sys.stdin = _stdin
 ```
-
 2. 在需要添加断点的地方，使用如下方法添加断点：
 ```
 ForkedPdb().set_trace()

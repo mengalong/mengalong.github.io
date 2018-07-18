@@ -2,7 +2,7 @@
 layout: post
 title: 使用pdb调试ceilometer代码
 category : OpenStack
-tags : [OpenStack|Gnocchi]
+tags : [OpenStack|Ceilometer|pdb]
 ---
 
 ***

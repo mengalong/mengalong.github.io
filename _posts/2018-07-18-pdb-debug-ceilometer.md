@@ -10,9 +10,8 @@ tags : [OpenStack|Ceilometer|pdb]
 
 声明：
 本博客欢迎转发,但请注明出处，保留原作者信息
-博客地址：[孟阿龙的博客](mengalong.github.io)
+博客地址：[孟阿龙的博客](http://mengalong.github.io)
 所有内容为本人学习、研究、总结。如有雷同，实属荣幸
-
 ***
 
 # Newton版本以前，Ceilometer代码调试方法：

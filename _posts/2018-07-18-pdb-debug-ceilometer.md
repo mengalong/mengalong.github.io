@@ -49,6 +49,5 @@ class ForkedPdb(pdb.Pdb):
 ```
 ForkedPdb().set_trace()
 ```
-
 3. 之后启动进程，即可进入到pdb调试模式，具体的命令和上边一致
 

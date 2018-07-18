@@ -13,6 +13,7 @@ tags : [OpenStack|Ceilometer|pdb]
 博客地址：[孟阿龙的博客](mengalong.github.io)
 所有内容为本人学习、研究、总结。如有雷同，实属荣幸
 ***
+
 #Newton版本以前，Ceilometer代码调试方法：
 ceilometer在Newton版本以前，polling-agent使用的是oslo_service模块启动的进程，因此可以直接使用python内建的模块 pdb 直接进行调试。具体调试方法如下：
 1. 在需要增加断点的地方，加入一行代码:

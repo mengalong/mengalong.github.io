@@ -5,15 +5,6 @@ category : OpenStack
 tags : [OpenStack|Ceilometer|pdb]
 ---
 
-***
-本博客所有文章采用的授权方式为 [**自由转载-非商用-非衍生-保持署名** ](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh)，转载请务必注明出处，谢谢。
-
-声明：
-本博客欢迎转发,但请注明出处，保留原作者信息
-博客地址：[孟阿龙的博客](http://mengalong.github.io)
-所有内容为本人学习、研究、总结。如有雷同，实属荣幸
-***
-
 # Newton版本以前，Ceilometer代码调试方法：
 ceilometer在Newton版本以前，polling-agent使用的是oslo_service模块启动的进程，因此可以直接使用python内建的模块 pdb 直接进行调试。具体调试方法如下：
 

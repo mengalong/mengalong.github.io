@@ -29,6 +29,7 @@ s : 进入当前行对应函数的内部
 ceilometer在Newton版本开始，使用cotyledon 这个模块来启动进程框架，该模块底层是multiprocess，启动进程框架之后会进入子进程，此时使用上边的方法就不能进入到子进程的debug，此时需要使用如下方法：
 
 1. 增加一个新的类，用于调试多线程
+
 ```
 import sys
 import pdb

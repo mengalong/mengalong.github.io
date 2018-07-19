@@ -5,10 +5,9 @@ baseurl:
 url: 
 date_format: "ordinal"
 title: Mengalong
-subtitle: "Talk is cheap.Show me the code."
+subtitle: "人生在勤,不索何获"
 description: "MengAlong的个人博客"
-keywords: MengAlong 
-favicon: /favicon.ico
+keywords: MengAlong
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
@@ -16,9 +15,11 @@ side_bar_repo_limit: 5
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: Meng A Long
-organization: Baidu, Inc.
-location: Beijing, China
+author: Along Meng
+organization: Freelance
+organization_url: 
+github_username: mengalong
+location: Xi'an, China
 email: alongmeng@gmail.com
 
 # ---------------- #
@@ -32,6 +33,10 @@ navs:
   -
     href: /categories/
     label: 分类
+
+#   -
+#     href: /archives/
+#     label: 归档
 
   -
     href: /wiki/
@@ -76,32 +81,45 @@ collections:
         output: true
         permalink: /wiki/:path/
 
-# ---------------- #
-#      Socials     #
-# ---------------- #
-github_username: mengalong
+repository: mengalong/mengalong.github.io
 
 # ---------------- #
 #      Comments    #
 # ---------------- #
-# support provider: disqus, duoshuo
-comments_provider: disqus
-# !!!重要!!! 请修改下面两个用户名为你自己申请的
-# !!!Important!!! Please modify usernames below to yours
-duoshuo_username: mengalong
-disqus_username: mengalong
-# 在使用 disqus 的时候可点击显示多说评论框
-lazy_load_duoshuo: true
+# support provider: disqus, gitment, gitalk
+comments_provider: gitalk
+# !!!重要!!! 请修改下面这些信息为你自己申请的
+# !!!Important!!! Please modify infos below to yours
+# https://disqus.com
+disqus:
+    username: 
+# https://imsun.net/posts/gitment-introduction/
+gitment:
+    owner: mengalong
+    repo: blog-comments
+    oauth:
+        client_id: 3240a5b831da711d5b1d
+        client_secret: eeb0f32703c8347018c51b058b61d5a48da70d1a
+# https://github.com/gitalk/gitalk#install
+gitalk:
+    owner: mengalong
+    repo: blog-comments
+    clientID: 3240a5b831da711d5b1d
+    clientSecret: eeb0f32703c8347018c51b058b61d5a48da70d1a
+# 在使用其它评论组件时可点击显示 Disqus
+lazy_load_disqus : false
+
+# ---------------- #
+#      Search      #
+# ---------------- #
+simple_jekyll_search:
+    # 是否支持全文搜索
+    fulltext: false
+    # 最多显示多少条搜索结果
+    limit: 10
 
 # ---------------- #
 #    Analytics     #
 # ---------------- #
 google:
     analytics_id: 
-
-# ---------------- #
-#      Datas       #
-# ---------------- #
-skill_software_keywords: [Python, Perl, Shell, Linux]
-skill_mobile_app_keywords: [Android, Reverse Engineering]
-skill_windows_keywords: [Win32 SDK, DuiLib, WTL, COM, WinDbg]

@@ -28,7 +28,8 @@ cat parse_json.py
 
 <!-- lang:python-->
 	#!/usr/bin/env python
-	import jsonfh = open("json.file", "r")
+	import json
+	fh = open("json.file", "r")
 	str = json.dumps(eval(fh.read()))
 	print str
 	obj = json.loads(str)

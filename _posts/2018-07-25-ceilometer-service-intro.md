@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ceilometer服务简介
+title: Ceilometer原理及介绍
 category : OpenStack
 tags : [OpenStack|Ceilometer]
 ---
@@ -21,6 +21,7 @@ ceilometer项目是openstack中用来做计量计费功能的一个组件，后�
 在某个特定时间，发生的一个动作，比如：19:09:08 创建了一个虚拟机
 * resource：
 资源，比如instance(虚拟机)、disk(磁盘）都是资源
+
 # 3. High-Level 架构
 ![ceilo-arch.png](https://upload-images.jianshu.io/upload_images/13183512-ee19f3fef5f4c1e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 如上，是当前Ceilometer的一个全局概览逻辑图.
@@ -29,6 +30,7 @@ ceilometer项目是openstack中用来做计量计费功能的一个组件，后�
 2. notification agent：一个deamon服务，通过监听消息队列获取相关数据，将其转换为event和sample，并根据pipeline中定义的方法将数据发送出去
 这和以前的版本相比，简化了不少，以前ceilometer包含了(polling-agent,notification-agent,collector，ceilometer-api)
 通过Ceilometer收集到的数据可以被发送到不同的后端。Gnocchi是用来提供对捕获到的时间序列的测量数据的存储和查询。Gnocchi未来的趋势是取代当前现存的metering数据存储接口(当前存储在mongodb、mysql等存储后端)。Aodh是一个告警服务，在满足用户设置的告警条件时，可以发送告警信息，其后端可以对接不同的数据库。Panko是用来获取系统中的各类事件并将其存储到对应后端数据库。
+
 # 4. 数据获取的过程
 ## 4.1 数据采集
 ![1-agents.png](https://upload-images.jianshu.io/upload_images/13183512-6ef518aa9bf68952.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -37,8 +39,10 @@ Ceilometer共有两种方法来收集数据：
 1. Notification agent，从notification bus上获取消息，将其转换为ceilometer的sample或者event数据
 2. Polling agent，周期性调用系统中的一些API或者外部工具来获取数据。轮询服务可能会对API服务带来较大的影响，因此对应的API服务需要针对这种轮询机制做一些优化。
 以上第一种方法是ceilometer-agent-notification提供的，他可以监控消息队列上的信息。第二种方法是通过polling-agent实现，通过配置可以实现轮询本地虚拟化层或者远程API来获取数据。
+
 ## 4.2 notification agent监听数据
 ![2-1-collection-notification.png](https://upload-images.jianshu.io/upload_images/13183512-3974af1bb890721c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 notification-agent可以消费来自不同服务上报的消息数据。
 这个系统的核心是notification-agent这个deamon服务，他可以监听openstack组件(比如nova、glance/cinder/neutron/等)发送到消息队列上的数据，以及ceilometer内部发送过来数据
 

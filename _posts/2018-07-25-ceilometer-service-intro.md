@@ -54,7 +54,10 @@ notification-agent加载ceilometer.notification这个namespace下的一个或者
 ![2-2-collection-poll.png](https://upload-images.jianshu.io/upload_images/13183512-db18bd685ce39acd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 Polling-agent通过主动调用service接口查询来获取数据。
-部署在计算节点上的polling-agent用来轮询计算资源的数据(这样agent可以更有效的和本地虚拟化层交互)，也被称为compute-agent。通过服务API轮询查询非计算资源相关数据的agent部署在控制节点上，也被称为central-agent。在all-in-one环境中，一个agent也支持同时提供以上两种角色。相反的，也可以通过部署多个agent实例来分担系统负载。Polling-agent进程可以加载ceilometer.poll.compute,ceilometer.poll.central,ceilometer.poll.ipmi这三个namespace中配置的插件。
+
+部署在计算节点上的polling-agent用来轮询计算资源的数据(这样agent可以更有效的和本地虚拟化层交互)，也被称为compute-agent。
+通过服务API轮询查询非计算资源相关数据的agent部署在控制节点上，也被称为central-agent。在all-in-one环境中，一个agent也支持同时提供以上两种角色。
+相反的，也可以通过部署多个agent实例来分担系统负载。Polling-agent进程可以加载ceilometer.poll.compute,ceilometer.poll.central,ceilometer.poll.ipmi这三个namespace中配置的插件。
 
 ## 4.4 数据处理
 ### 4.4.1 pipeline manager

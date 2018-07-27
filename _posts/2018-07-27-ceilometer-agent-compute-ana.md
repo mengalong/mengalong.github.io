@@ -14,9 +14,9 @@ tags : [OpenStack|Ceilometer]
 # 2. 服务启动命令
 本文测试环境是通过packstack在虚拟机环境中安装的一套 all-in-one Openstack环境。
 Polling Agent的启动命令如下：
-
-<!-- lang:python -->
+```
 /usr/bin/ceilometer-polling --logfile /var/log/ceilometer/polling.log
+```
 
 # 3. 进程启动基本流程
 启动代码的入口在
@@ -83,8 +83,7 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 
 ### 4.2.2 AgentManager初始化过程
 代码路径：ceilometer.polling.manager.AgentManager#__init__
-
-<!-- lang:python -->
+```
  1     def __init__(self, worker_id, conf, namespaces=None):
   2         namespaces = namespaces or ['compute', 'central']
   3         group_prefix = conf.polling.partitioning_group_prefix
@@ -138,6 +137,7 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
  51
  52         self._keystone = None
  53         self._keystone_last_exception = None
+```
 
 1. 第2行，初始化namespaces为 ['compute', 'central']
 2. 第3行，是用于partition功能的，暂时忽略
@@ -150,10 +150,8 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 (Pdb) p self.extensions[1].__dict__
 {'obj': <ceilometer.network.services.fwaas.FirewallPollster object at 0x7f1cc9ef92d0>, 'entry_point': EntryPoint.parse('network.services.firewall = ceilometer.network.services.fwaas:FirewallPollster'), 'name': 'network.services.firewall', 'plugin': <class 'ceilometer.network.services.fwaas.FirewallPollster'>}
 ```
-
 5. 第30行，加载discovery插件，加载了ceilometer.discover.central,ceilometer.discover.central 这两个namespaces下对应的插件。discovery插件在数据采集的时候会用到，这里不展开，后续单独介绍。加载完成后，self.discoveries 和 self.extensions的类型一样，都是stevedore.extension.Extension 对象。
 6. 第47~50行，初始化self.notifier 对象，这个对象主要是用来和消息队列进行交互的，默认消息队列使用的是rabbitmq。该对象的作用主要是未来在数据采集完成之后，会调用这里self.notifier的接口将数据发送到rabbitmq。该对象的主要变量是：
-
 ```
 (Pdb) p self.notifier.__dict__
 {'_serializer': <oslo_messaging.serializer.NoOpSerializer object at 0x7f1cc9aa3710>, '_driver_mgr': <stevedore.named.NamedExtensionManager object at 0x7f1cc9aa3890>, 'retry': -1, '_driver_names': ['messagingv2'], '_topics': ['notifications'], 'publisher_id': 'ceilometer.polling', 'transport': <oslo_messaging.transport.NotificationTransport object at 0x7f1cc9b26550>}

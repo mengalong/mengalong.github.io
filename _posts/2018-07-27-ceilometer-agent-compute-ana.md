@@ -143,7 +143,6 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 2. 第3行，是用于partition功能的，暂时忽略
 3. 第14~21行，加载数据采集插件，加载了ceilometer.poll.compute, ceilometer.poll.central, ceilometer.builder.poll.central 这三个namespaces下对应的插件，具体包含哪些插件可以去看setup.cfg中的定义
 4. 加载完成之后，self.extensions 是一个list，其中是多个元素，每个元素就是一个插件对象
-
 ```
 (Pdb) p self.extensions[1]
 <stevedore.extension.Extension object at 0x7f1cc9ef9310>
@@ -160,7 +159,6 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 (Pdb) p self.notifier._driver_mgr.__dict__
 {'_extensions_by_name_cache': None, '_names': ['messagingv2'], 'namespace': 'oslo.messaging.notify.drivers', '_on_load_failure_callback': None, 'extensions': [<stevedore.extension.Extension object at 0x7f1cc9aa3c10>], 'propagate_map_exceptions': False, '_name_order': False, '_missing_names': set([])}
 ```
-
    * self.notifier.topics = ['notifications']
    * self.notifier._driver_names = 'messagingv2'(定义在ceilometer/publisher/messaging.py 中的 telemetry_driver这个变量)，代表的是ceilometer向消息队列发送消息时使用的驱动类型
    * self.notifier.publisher_id = 'ceilometer.polling'

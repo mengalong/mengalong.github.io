@@ -151,6 +151,7 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 ```
 5. 第30行，加载discovery插件，加载了ceilometer.discover.central,ceilometer.discover.central 这两个namespaces下对应的插件。discovery插件在数据采集的时候会用到，这里不展开，后续单独介绍。加载完成后，self.discoveries 和 self.extensions的类型一样，都是stevedore.extension.Extension 对象。
 6. 第47~50行，初始化self.notifier 对象，这个对象主要是用来和消息队列进行交互的，默认消息队列使用的是rabbitmq。该对象的作用主要是未来在数据采集完成之后，会调用这里self.notifier的接口将数据发送到rabbitmq。该对象的主要变量是：
+
 ```
 (Pdb) p self.notifier.__dict__
 {'_serializer': <oslo_messaging.serializer.NoOpSerializer object at 0x7f1cc9aa3710>, '_driver_mgr': <stevedore.named.NamedExtensionManager object at 0x7f1cc9aa3890>, 'retry': -1, '_driver_names': ['messagingv2'], '_topics': ['notifications'], 'publisher_id': 'ceilometer.polling', 'transport': <oslo_messaging.transport.NotificationTransport object at 0x7f1cc9b26550>}
@@ -161,7 +162,7 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 ```
    * self.notifier.topics = ['notifications']
    * self.notifier._driver_names = 'messagingv2'(定义在ceilometer/publisher/messaging.py 中的 telemetry_driver这个变量)，代表的是ceilometer向消息队列发送消息时使用的驱动类型
-   * self.notifier.publisher_id = 'ceilometer.polling'
+   * self.notifier.publisher\_id = 'ceilometer.polling'
    * self.notifier._driver_mgr 是从oslo.messaging.notify.drivers 中加载名称为messagingv2对应的插件
    * self.notifier.transport 是从oslo.messaging.drivers 中加载名称为 rabbit对应的插件。因为ceilometer.conf 中 transport_url定义是：transport_url=rabbit://guest:guest@192.168.2.120:5672/
 
@@ -169,7 +170,6 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 ### 4.3.1 AgentManager 服务启动入口:
 
 代码路径: ceilometer.polling.manager.AgentManager#run
-
 ```
     def run(self):
         super(AgentManager, self).run()
@@ -181,17 +181,17 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 ```
 
 这里主要是第三行和最后一行，进入进程启动的具体过程，其中：
-第3行，初始化polling_manager
+第3行，初始化polling\_manager
 第4行，启动周期任务
 
-### 4.3.2 初始化polling_manager
+### 4.3.2 初始化polling\_manager
 1. 入口：ceilometer/polling/manager.py:385
 
 ```
 self.polling_manager = PollingManager(self.conf)
 ```
 
-通过PollingManager+conf文件初始化polling_manager
+通过PollingManager+conf文件初始化polling\_manager
 2. 在ceilometer/polling/manager.py:54中定义了polling.cfg_file 的初始化为 polling.yaml,该配置文件对应的格式如下,其中定义了不同插件的采集周期，这里的meters中的名称需要和extensions中加载的插件名对应，只有在这里定义了采集周期的插件，最终才会周期性调度
 
 ```
@@ -209,7 +209,7 @@ self.polling_manager = PollingManager(self.conf)
 ```
 
 3. 根据加载的配置文件，初始化sources,
-入口：ceilometer.polling.manager.PollingSource#__init__
+入口：ceilometer.polling.manager.PollingSource#\_\_init\_\_
 
 ```
         super(PollingManager, self).__init__(conf)
@@ -235,8 +235,7 @@ self.polling_manager = PollingManager(self.conf)
 ```
 
 ### 4.3.3 AgentManager服务启动过程：
-启动入口：ceilometer.polling.manager.AgentManager#start_polling_tasks
-
+启动入口：ceilometer.polling.manager.AgentManager#start\_polling\_tasks
 ```
   1 def start_polling_tasks(self):
   2     data = self.setup_polling_tasks()
@@ -262,11 +261,11 @@ self.polling_manager = PollingManager(self.conf)
 ```
 
 服务启动的具体过程主要是如下两步:
-1. 通过setup_polling_tasks()获取需要加入周期任务的插件列表
+1. 通过setup\_polling\_tasks()获取需要加入周期任务的插件列表
 2. 按照设置的插件运行周期进行分组，同一周期的插件加入到相同的运行队列中启动运行
 
 #### 4.3.3.1 获取周期任务列表
-代码入口：ceilometer.polling.manager.AgentManager#setup_polling_tasks
+代码入口：ceilometer.polling.manager.AgentManager#setup\_polling\_tasks
 
 ```
   1 def setup_polling_tasks(self):
@@ -282,9 +281,9 @@ self.polling_manager = PollingManager(self.conf)
  11     return polling_tasks
 ```
 
-1. 遍历self.polling_manager.sources中的source
-2. 遍历self.extensions，查看如果对应插件在对应source的meters列表中,代表该插件需要定期执行，获取该插件定义的执行周期，将其加入到polling_tasks中
-3. 最终polling_tasks格式如下：
+1. 遍历self.polling\_manager.sources中的source
+2. 遍历self.extensions，查看如果对应插件在对应source的meters列表中,代表该插件需要定期执行，获取该插件定义的执行周期，将其加入到polling\_tasks中
+3. 最终polling\_tasks格式如下：
 
 ```
 (Pdb) p data

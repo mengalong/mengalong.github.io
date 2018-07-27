@@ -14,14 +14,14 @@ tags : [OpenStack|Ceilometer]
 # 2. 服务启动命令
 本文测试环境是通过packstack在虚拟机环境中安装的一套 all-in-one Openstack环境。
 Polling Agent的启动命令如下：
-```
+```python
 /usr/bin/ceilometer-polling --logfile /var/log/ceilometer/polling.log
 ```
 
 # 3. 进程启动基本流程
 启动代码的入口在
 ceilometer.cmd.polling.main
-```
+```python
 def main():
     conf = cfg.ConfigOpts()
     conf.register_cli_opts(CLI_OPTS)

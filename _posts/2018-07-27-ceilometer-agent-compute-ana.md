@@ -82,7 +82,7 @@ conf：即上一步初始化的配置对象
 conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 
 ### 4.2.2 AgentManager初始化过程
-代码路径：ceilometer.polling.manager.AgentManager#__init__
+代码路径：ceilometer.polling.manager.AgentManager#\_\_init\_\_
 ```
  1     def __init__(self, worker_id, conf, namespaces=None):
   2         namespaces = namespaces or ['compute', 'central']
@@ -138,11 +138,10 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
  52         self._keystone = None
  53         self._keystone_last_exception = None
 ```
-
 1. 第2行，初始化namespaces为 ['compute', 'central']
 2. 第3行，是用于partition功能的，暂时忽略
 3. 第14~21行，加载数据采集插件，加载了ceilometer.poll.compute, ceilometer.poll.central, ceilometer.builder.poll.central 这三个namespaces下对应的插件，具体包含哪些插件可以去看setup.cfg中的定义
-4. 加载完成之后，self.extensions 是一个list，其中是多个元素，每个元素就是一个插件对象
+4. 加载完成之后，self.extensions 是一个list，其中是多个元素，每个元素就是一个插件对象:
 ```
 (Pdb) p self.extensions[1]
 <stevedore.extension.Extension object at 0x7f1cc9ef9310>

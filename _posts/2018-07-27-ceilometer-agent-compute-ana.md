@@ -14,9 +14,9 @@ tags : [OpenStack|Ceilometer]
 # 2. 服务启动命令
 本文测试环境是通过packstack在虚拟机环境中安装的一套 all-in-one Openstack环境。
 Polling Agent的启动命令如下：
+
 <!-- lang:python -->
 /usr/bin/ceilometer-polling --logfile /var/log/ceilometer/polling.log
-
 
 # 3. 进程启动基本流程
 启动代码的入口在
@@ -81,9 +81,10 @@ worker_id: 这个参数在哪里初始化的还没搞清楚
 conf：即上一步初始化的配置对象
 conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 
-### 4.2.1 AgentManager初始化过程
+### 4.2.2 AgentManager初始化过程
 代码路径：ceilometer.polling.manager.AgentManager#__init__
-```
+
+<!-- lang:python -->
  1     def __init__(self, worker_id, conf, namespaces=None):
   2         namespaces = namespaces or ['compute', 'central']
   3         group_prefix = conf.polling.partitioning_group_prefix
@@ -137,19 +138,22 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
  51
  52         self._keystone = None
  53         self._keystone_last_exception = None
-```
+
 1. 第2行，初始化namespaces为 ['compute', 'central']
 2. 第3行，是用于partition功能的，暂时忽略
 3. 第14~21行，加载数据采集插件，加载了ceilometer.poll.compute, ceilometer.poll.central, ceilometer.builder.poll.central 这三个namespaces下对应的插件，具体包含哪些插件可以去看setup.cfg中的定义
 4. 加载完成之后，self.extensions 是一个list，其中是多个元素，每个元素就是一个插件对象
+
 ```
 (Pdb) p self.extensions[1]
 <stevedore.extension.Extension object at 0x7f1cc9ef9310>
 (Pdb) p self.extensions[1].__dict__
 {'obj': <ceilometer.network.services.fwaas.FirewallPollster object at 0x7f1cc9ef92d0>, 'entry_point': EntryPoint.parse('network.services.firewall = ceilometer.network.services.fwaas:FirewallPollster'), 'name': 'network.services.firewall', 'plugin': <class 'ceilometer.network.services.fwaas.FirewallPollster'>}
 ```
+
 5. 第30行，加载discovery插件，加载了ceilometer.discover.central,ceilometer.discover.central 这两个namespaces下对应的插件。discovery插件在数据采集的时候会用到，这里不展开，后续单独介绍。加载完成后，self.discoveries 和 self.extensions的类型一样，都是stevedore.extension.Extension 对象。
 6. 第47~50行，初始化self.notifier 对象，这个对象主要是用来和消息队列进行交互的，默认消息队列使用的是rabbitmq。该对象的作用主要是未来在数据采集完成之后，会调用这里self.notifier的接口将数据发送到rabbitmq。该对象的主要变量是：
+
 ```
 (Pdb) p self.notifier.__dict__
 {'_serializer': <oslo_messaging.serializer.NoOpSerializer object at 0x7f1cc9aa3710>, '_driver_mgr': <stevedore.named.NamedExtensionManager object at 0x7f1cc9aa3890>, 'retry': -1, '_driver_names': ['messagingv2'], '_topics': ['notifications'], 'publisher_id': 'ceilometer.polling', 'transport': <oslo_messaging.transport.NotificationTransport object at 0x7f1cc9b26550>}
@@ -158,6 +162,7 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 (Pdb) p self.notifier._driver_mgr.__dict__
 {'_extensions_by_name_cache': None, '_names': ['messagingv2'], 'namespace': 'oslo.messaging.notify.drivers', '_on_load_failure_callback': None, 'extensions': [<stevedore.extension.Extension object at 0x7f1cc9aa3c10>], 'propagate_map_exceptions': False, '_name_order': False, '_missing_names': set([])}
 ```
+
    * self.notifier.topics = ['notifications']
    * self.notifier._driver_names = 'messagingv2'(定义在ceilometer/publisher/messaging.py 中的 telemetry_driver这个变量)，代表的是ceilometer向消息队列发送消息时使用的驱动类型
    * self.notifier.publisher_id = 'ceilometer.polling'
@@ -166,7 +171,9 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
 
 ## 4.3. AgentManager服务启动
 ### 4.3.1 AgentManager 服务启动入口:
+
 代码路径: ceilometer.polling.manager.AgentManager#run
+
 ```
     def run(self):
         super(AgentManager, self).run()
@@ -176,17 +183,21 @@ conf.polling_namespaces: 使用默认的配置，即：['compute', 'central']
             self.join_partitioning_groups()
         self.start_polling_tasks()
 ```
+
 这里主要是第三行和最后一行，进入进程启动的具体过程，其中：
 第3行，初始化polling_manager
 第4行，启动周期任务
 
 ### 4.3.2 初始化polling_manager
 1. 入口：ceilometer/polling/manager.py:385
+
 ```
 self.polling_manager = PollingManager(self.conf)
 ```
+
 通过PollingManager+conf文件初始化polling_manager
 2. 在ceilometer/polling/manager.py:54中定义了polling.cfg_file 的初始化为 polling.yaml,该配置文件对应的格式如下,其中定义了不同插件的采集周期，这里的meters中的名称需要和extensions中加载的插件名对应，只有在这里定义了采集周期的插件，最终才会周期性调度
+
 ```
 {"sources": [{"name": source_1,
                       "interval": interval_time,
@@ -200,8 +211,10 @@ self.polling_manager = PollingManager(self.conf)
                     ]}
         }
 ```
+
 3. 根据加载的配置文件，初始化sources,
 入口：ceilometer.polling.manager.PollingSource#__init__
+
 ```
         super(PollingManager, self).__init__(conf)
         cfg = self.load_config(conf.polling.cfg_file)
@@ -212,10 +225,12 @@ self.polling_manager = PollingManager(self.conf)
             self.sources.append(PollingSource(s))
 
 ```
+
 1.  按照polling.yaml 中的分组，对sources进行初始化，最终对应的就是self.polling_manager.sources
 2. self.polling_manager.sources中的每一个对象就是一个PollingSource,每一个PollingSource关键的参数：
    * meters: 即为上边polling.yaml 中每一组source中的meter
    * interval：即为polling.yaml 中的interval
+
 ```
 (Pdb) p self.polling_manager.sources
 [<ceilometer.polling.manager.PollingSource object at 0x7f71a2f48150>]
@@ -225,6 +240,7 @@ self.polling_manager = PollingManager(self.conf)
 
 ### 4.3.3 AgentManager服务启动过程：
 启动入口：ceilometer.polling.manager.AgentManager#start_polling_tasks
+
 ```
   1 def start_polling_tasks(self):
   2     data = self.setup_polling_tasks()
@@ -248,12 +264,14 @@ self.polling_manager = PollingManager(self.conf)
  20
  21     utils.spawn_thread(self.polling_periodics.start, allow_empty=True)
 ```
+
 服务启动的具体过程主要是如下两步:
 1. 通过setup_polling_tasks()获取需要加入周期任务的插件列表
 2. 按照设置的插件运行周期进行分组，同一周期的插件加入到相同的运行队列中启动运行
 
 #### 4.3.3.1 获取周期任务列表
 代码入口：ceilometer.polling.manager.AgentManager#setup_polling_tasks
+
 ```
   1 def setup_polling_tasks(self):
   2     polling_tasks = {}
@@ -267,9 +285,11 @@ self.polling_manager = PollingManager(self.conf)
  10                 polling_task.add(pollster, source)
  11     return polling_tasks
 ```
+
 1. 遍历self.polling_manager.sources中的source
 2. 遍历self.extensions，查看如果对应插件在对应source的meters列表中,代表该插件需要定期执行，获取该插件定义的执行周期，将其加入到polling_tasks中
 3. 最终polling_tasks格式如下：
+
 ```
 (Pdb) p data
 {300: <ceilometer.polling.manager.PollingTask object at 0x7fa6103394d0>}
@@ -278,8 +298,10 @@ self.polling_manager = PollingManager(self.conf)
 (Pdb) p data[300].__dict__
 {'manager': <ceilometer.polling.manager.AgentManager object at 0x7fa610fb47d0>, '_telemetry_secret': '2e30d044a69343e0', 'pollster_matches': defaultdict(<type 'set'>, {'some_pollsters': set([<stevedore.extension.Extension object at 0x7fa610689850>, <stevedore.extension.Extension object at 0x7fa610697090>, <stevedore.extension.Extension object at 0x7fa61066c0d0>, <stevedore.extension.Extension object at 0x7fa61066c150>, <stevedore.extension.Extension object at 0x7fa610690190>, <stevedore.extension.Extension object at 0x7fa61066c190>, <stevedore.extension.Extension object at 0x7fa610690050>, <stevedore.extension.Extension object at 0x7fa61066ca50>, <stevedore.extension.Extension object at 0x7fa610690290>, <stevedore.extension.Extension object at 0x7fa61066c2d0>, <stevedore.extension.Extension object at 0x7fa610690890>, <stevedore.extension.Extension object at 0x7fa610733bd0>, <stevedore.extension.Extension object at 0x7fa610667c10>, <stevedore.extension.Extension object at 0x7fa610667490>, <stevedore.extension.Extension object at 0x7fa6106970d0>, <stevedore.extension.Extension object at 0x7fa610689550>, <stevedore.extension.Extension object at 0x7fa610667dd0>, <stevedore.extension.Extension object at 0x7fa610689e50>, <stevedore.extension.Extension object at 0x7fa610667e10>, <stevedore.extension.Extension object at 0x7fa610667e50>, <stevedore.extension.Extension object at 0x7fa610667e90>, <stevedore.extension.Extension object at 0x7fa610683790>])}), 'resources': defaultdict(<function <lambda> at 0x7fa610330b90>, {'some_pollsters-cpu_l3_cache': <ceilometer.polling.manager.Resources object at 0x7fa610339110>, 'some_pollsters-disk.device.read.bytes': <ceilometer.polling.manager.Resources object at 0x7fa6103398d0>, 'some_pollsters-hardware.memory.cached': <ceilometer.polling.manager.Resources object at 0x7fa610340310>, 'some_pollsters-disk.device.write.requests': <ceilometer.polling.manager.Resources object at 0x7fa6103401d0>, 'some_pollsters-hardware.cpu.util': <ceilometer.polling.manager.Resources object at 0x7fa6103404d0>, 'some_pollsters-memory.usage': <ceilometer.polling.manager.Resources object at 0x7fa610339790>, 'some_pollsters-hardware.system_stats.io.outgoing.blocks': <ceilometer.polling.manager.Resources object at 0x7fa610340410>, 'some_pollsters-hardware.memory.buffer': <ceilometer.polling.manager.Resources object at 0x7fa610340150>, 'some_pollsters-hardware.memory.swap.total': <ceilometer.polling.manager.Resources object at 0x7fa610340490>, 'some_pollsters-network.incoming.bytes': <ceilometer.polling.manager.Resources object at 0x7fa610339c10>, 'some_pollsters-cpu': <ceilometer.polling.manager.Resources object at 0x7fa610340190>, 'some_pollsters-disk.device.write.bytes': <ceilometer.polling.manager.Resources object at 0x7fa610340290>, 'some_pollsters-hardware.network.ip.outgoing.datagrams': <ceilometer.polling.manager.Resources object at 0x7fa610340210>, 'some_pollsters-disk.device.read.requests': <ceilometer.polling.manager.Resources object at 0x7fa610339a10>, 'some_pollsters-hardware.memory.swap.avail': <ceilometer.polling.manager.Resources object at 0x7fa610340090>, 'some_pollsters-network.incoming.packets': <ceilometer.polling.manager.Resources object at 0x7fa610339d10>, 'some_pollsters-hardware.system_stats.io.incoming.blocks': <ceilometer.polling.manager.Resources object at 0x7fa610340590>, 'some_pollsters-network.outgoing.bytes': <ceilometer.polling.manager.Resources object at 0x7fa610339a50>, 'some_pollsters-hardware.network.ip.incoming.datagrams': <ceilometer.polling.manager.Resources object at 0x7fa610340350>, 'some_pollsters-hardware.memory.total': <ceilometer.polling.manager.Resources object at 0x7fa610340250>, 'some_pollsters-network.outgoing.packets': <ceilometer.polling.manager.Resources object at 0x7fa6103400d0>, 'some_pollsters-hardware.memory.used': <ceilometer.polling.manager.Resources object at 0x7fa6103403d0>}), '_batch': True}
 ```
+
 #### 4.3.3.2 启动周期性任务
 代码入口: ceilometer.polling.manager.AgentManager#start_polling_tasks
+
 ```
   1 def start_polling_tasks(self):
   2     data = self.setup_polling_tasks()
@@ -303,12 +325,14 @@ self.polling_manager = PollingManager(self.conf)
  20
  21     utils.spawn_thread(self.polling_periodics.start, allow_empty=True)
 ```
+
 1. 第9~11行，根据data中任务组的个数，创建N个线程池大小
 2. 第13~19行，遍历data中的任务，调用将其加入到线程池中的线程调度任务中，主要在于self.interval_task,在self.interval_task 中实际调用的是task.poll_and_notify, 这里的task就是上边的 ceilometer.polling.manager.PollingTask 对象.
 3. 第21行，启动线程的周期调度，最终进程框架中的多个线程就周期性的调用对应线程绑定的PollingTask 中的 poll_and_notify 方法,调度插件周期性采集数据
 
 #### 4.3.3.3 周期性采集任务
 代码入口：ceilometer.polling.manager.PollingTask#poll_and_notify
+
 ```
   1 def poll_and_notify(self):
   2     """Polling sample and notify."""
@@ -387,11 +411,14 @@ self.polling_manager = PollingManager(self.conf)
  75                     % ({'name': pollster.name, 'error': err}),
  76                     exc_info=True)
 ```
+
 1. 第6~7 行，对上文的data中的pollster_matches进行遍历，其格式如下：
+
 ```
 (Pdb) p data[300].pollster_matches
 defaultdict(<type 'set'>, {'some_pollsters': set([<stevedore.extension.Extension object at 0x7fa610689850>, <stevedore.extension.Extension object at 0x7fa610697090>, <stevedore.extension.Extension object at 0x7fa61066c0d0>, <stevedore.extension.Extension object at 0x7fa61066c150>, <stevedore.extension.Extension object at 0x7fa610690190>, <stevedore.extension.Extension object at 0x7fa61066c190>, <stevedore.extension.Extension object at 0x7fa610690050>, <stevedore.extension.Extension object at 0x7fa61066ca50>, <stevedore.extension.Extension object at 0x7fa610690290>, <stevedore.extension.Extension object at 0x7fa61066c2d0>, <stevedore.extension.Extension object at 0x7fa610690890>, <stevedore.extension.Extension object at 0x7fa610733bd0>, <stevedore.extension.Extension object at 0x7fa610667c10>, <stevedore.extension.Extension object at 0x7fa610667490>, <stevedore.extension.Extension object at 0x7fa6106970d0>, <stevedore.extension.Extension object at 0x7fa610689550>, <stevedore.extension.Extension object at 0x7fa610667dd0>, <stevedore.extension.Extension object at 0x7fa610689e50>, <stevedore.extension.Extension object at 0x7fa610667e10>, <stevedore.extension.Extension object at 0x7fa610667e50>, <stevedore.extension.Extension object at 0x7fa610667e90>, <stevedore.extension.Extension object at 0x7fa610683790>])})
 ```
+
 可以看到，第6行的source_name 即为polling.yaml 中的每一组的sourcename，pollsters为对应组中meters所对应的extensions对象的集合
 2. 第8行开始对所有的pollsters进行遍历，调度插件采集数据
 3. 每一个插件采集数据的时候有1个必备元素为：

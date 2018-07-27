@@ -17,6 +17,7 @@ Polling Agent的启动命令如下：
 <!-- lang:python -->
 /usr/bin/ceilometer-polling --logfile /var/log/ceilometer/polling.log
 
+
 # 3. 进程启动基本流程
 启动代码的入口在
 ceilometer.cmd.polling.main

@@ -24,6 +24,7 @@ sources:
       meters:
         - memory.resident
 ```
+
 # 3. 代码逻辑
 ## 3.1 获取resources列表
 代码入口：ceilometer.polling.manager.PollingTask#poll\_and\_notify

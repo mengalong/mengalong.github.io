@@ -16,6 +16,7 @@ tags : [OpenStack|Ceilometer]
 memory.resident = ceilometer.compute.pollsters.instance_stats:MemoryResidentPollster
 ```
 2. polling.yaml 中定义如下,代表该插件为300s执行一次
+
 ```
 ---
 sources:
@@ -112,6 +113,7 @@ local_instances = ceilometer.compute.discovery:InstanceDiscovery
 (Pdb) p discovered[0].__dict__
 {'status': 'active', 'flavor': {'name': 'm1.tiny', 'ram': 512, 'ephemeral': 0, 'vcpus': 1, 'swap': 0, 'disk': 1, 'id': u'1'}, 'hostId': '4e63f5b48c402619503a916fc411c549a6b4337f14c7a379f24778d2', 'OS-EXT-SRV-ATTR:host': 'localhost.localdomain', 'name': 'mengalong', 'tenant_id': '2b45d8c84d24435aa29ec12e6d1426e0', 'image': {'id': 'f12c5ea1-a14c-4f71-b622-30d57c163b62'}, 'architecture': 'x86_64', 'OS-EXT-STS:vm_state': 'running', 'OS-EXT-SRV-ATTR:instance_name': 'instance-00000001', 'user_id': 'bed6963f32454af1ba30093ee415fbfe', 'os_type': 'hvm', 'id': '40b0fcf9-6770-4ebc-95e7-8a3b15ebebd0', 'metadata': {}}
 ```
+
 ## 3.3 调用memory.resident插件的get_sample方法
 以上两步获取到了虚拟机列表之后，再回到之前的 poll_and_notify方法中，下一步就是调用memory.resident 插件对应的get_sample 方法来采集对应虚拟机的详细数据
 入口：ceilometer/polling/manager.py:183
@@ -140,6 +142,7 @@ local_instances = ceilometer.compute.discovery:InstanceDiscovery
 1. 第2行，获取该插件本次执行时距离上次执行的时间差
 2. 第3行，遍历虚拟机列表
 3. 调用self.\_inspect_cached方法获取指定虚拟机的相关监控数据
+
 ## 3.5 插件memory.resident的inspect方法
 1. 在该插件的父类中，定义了inspector_method = 'inspect_instance'
 3. 在插件初始化的时候，self.inspector = self._get_inspector(self.conf) 初始化了本插件对应的inspector
@@ -151,17 +154,19 @@ local_instances = ceilometer.compute.discovery:InstanceDiscovery
 ```
 libvirt = ceilometer.compute.virt.libvirt.inspector:LibvirtInspector
 ```
-4. 调用ceilometer.compute.virt.libvirt.inspector.LibvirtInspector#inspect_instance 这个方法获取到的数据为：
+3. 调用ceilometer.compute.virt.libvirt.inspector.LibvirtInspector#inspect_instance 这个方法获取到的数据为：
 ```
 {'cpu_number': 1, 'cpu_time': 561600559525L, 'memory_swap_in': None, 'memory_usage': None, 'memory_bandwidth_total': None, 'memory_bandwidth_local': None, 'cpu_cycles': None, 'cache_references': None, 'cpu_util': None, 'memory_swap_out': None, 'cache_misses': None, 'cpu_l3_cache_usage': None, 'memory_resident': 8L, 'instructions': None}
 ```
-5. 本实例中会再获取返回数据中的 memory_resident 对应的值，层层返回到poll_and_notify方法中，对应的sample结构为：
+4. 本实例中会再获取返回数据中的 memory_resident 对应的值，层层返回到poll_and_notify方法中，对应的sample结构为：
+
 ```
 (Pdb) p sample
 <name: memory.resident, volume: 181, resource_id: 40b0fcf9-6770-4ebc-95e7-8a3b15ebebd0, timestamp: None>
 (Pdb) p sample.__dict__
 {'user_id': 'bed6963f32454af1ba30093ee415fbfe', 'name': 'memory.resident', 'resource_id': '40b0fcf9-6770-4ebc-95e7-8a3b15ebebd0', 'timestamp': None, 'id': '93cad640-920e-11e8-aa10-080027e77a00', 'volume': 181L, 'source': 'openstack', 'monotonic_time': 2703.940111794, 'project_id': '2b45d8c84d24435aa29ec12e6d1426e0', 'type': 'gauge', 'resource_metadata': {'status': 'active', 'disk_gb': 1, 'instance_host': 'localhost.localdomain', 'image': {'id': 'f12c5ea1-a14c-4f71-b622-30d57c163b62'}, 'ephemeral_gb': 0, 'host': '4e63f5b48c402619503a916fc411c549a6b4337f14c7a379f24778d2', 'flavor': {'name': 'm1.tiny', 'ram': 512, 'ephemeral': 0, 'vcpus': 1, 'swap': 0, 'disk': 1, 'id': u'1'}, 'task_state': u'', 'image_ref_url': None, 'memory_mb': 512, 'root_gb': 1, 'display_name': 'mengalong', 'name': 'instance-00000001', 'vcpus': 1, 'instance_id': '40b0fcf9-6770-4ebc-95e7-8a3b15ebebd0', 'instance_type': 'm1.tiny', 'state': 'running', 'image_ref': 'f12c5ea1-a14c-4f71-b622-30d57c163b62', 'architecture': 'x86_64', 'os_type': 'hvm'}, 'unit': 'MB'}
 ```
+
 ## 3.7 数据入库
 ### 3.7.1 调用agent的notifier的sample方法，将数据发送到消息队列
 代码入口：ceilometer.polling.manager.PollingTask#_send_notification
@@ -174,7 +179,6 @@ libvirt = ceilometer.compute.virt.libvirt.inspector:LibvirtInspector
         )
 ```
 这里self.manager.notifier 是oslo_messaging.Notifier的对象
-
 ### 3.7.2 notifier的sample方法：
 代码入口：oslo_messaging.notify.notifier.Notifier#sample
 这就对应的是公共库oslo.messaging库中的方法,最终将数据发送到了消息队列的 telemetry.polling 队里上

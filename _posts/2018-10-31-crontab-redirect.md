@@ -31,7 +31,7 @@ bash test.sh &>test.out //等价于第二种方法
 ```
 
 比较一下以上几种的效果：
- 1. 第一种：错误输出在屏幕，正常输出在文件test.out
+* 第一种：错误输出在屏幕，正常输出在文件test.out
 
 ```
 root@mengalong:~/opdir/mengalong/t/t# cat test.sh
@@ -45,7 +45,7 @@ root@mengalong:~/opdir/mengalong/t/t# cat test.out
 Wed Oct 31 11:07:24 CST 2018
 ```
 
-2. 第二种：错误输出和正常输出均重定向到文件test.out中
+* 第二种：错误输出和正常输出均重定向到文件test.out中
 
 ```
 root@mengalong:~/opdir/mengalong/t/t# bash test.sh >test.out 2>&1
@@ -54,20 +54,22 @@ test.sh: line 2: t: command not found
 Wed Oct 31 11:09:02 CST 2018
 ```
 
-3. 第三种：错误输出和正常输出互相覆盖
+* 第三种：错误输出和正常输出互相覆盖
 ```
 root@mengalong:~/opdir/mengalong/t/t# bash test.sh >test.out 2>test.out
 root@mengalong:~/opdir/mengalong/t/t# cat test.out
 Wed Oct 31 11:10:36 CST 2018
 ot found
 ```
-4. 第四种，特殊情况，比较一下bash test.sh 2>&1  >test.out 和 bash test.sh >test.out 2>&1 的区别:
+
+* 第四种，特殊情况，比较一下bash test.sh 2>&1  >test.out 和 bash test.sh >test.out 2>&1 的区别:
 ```
 root@mengalong:~/opdir/mengalong/t/t# bash test.sh 2>&1  >test.out
 test.sh: line 2: t: command not found
 root@mengalong:~/opdir/mengalong/t/t# cat test.out
 Wed Oct 31 11:12:13 CST 2018
 ```
+
 这里只是把 2>&1 放在了 >test.out 前边，但是结果却不是像我们想象的那样，错误和正常输出都进入test.out 文件。这是因为, bash test.sh 2>&1 >test.out 这个命令中， 2>&1 的时候，只是把错误输出重定向到了标准输出，而此时标准输出的默认值是屏幕，因此实际等价于标准错误输出被重定向到了屏幕，而非文件。因此重定向需要注意顺序。
 
 # 问题解决

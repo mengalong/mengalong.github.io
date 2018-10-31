@@ -32,6 +32,7 @@ bash test.sh &>test.out //等价于第二种方法
 
 比较一下以上几种的效果：
 * 第一种：错误输出在屏幕，正常输出在文件test.out
+
 ```
 root@mengalong:~/opdir/mengalong/t/t# cat test.sh
 #!/bin/bash

@@ -32,6 +32,7 @@ bash test.sh &>test.out //等价于第二种方法
 
 比较一下以上几种的效果：
  1. 第一种：错误输出在屏幕，正常输出在文件test.out
+
 ```
 root@mengalong:~/opdir/mengalong/t/t# cat test.sh
 #!/bin/bash
@@ -43,13 +44,16 @@ test.sh: line 2: t: command not found
 root@mengalong:~/opdir/mengalong/t/t# cat test.out
 Wed Oct 31 11:07:24 CST 2018
 ```
+
 2. 第二种：错误输出和正常输出均重定向到文件test.out中
+
 ```
 root@mengalong:~/opdir/mengalong/t/t# bash test.sh >test.out 2>&1
 root@mengalong:~/opdir/mengalong/t/t# cat test.out
 test.sh: line 2: t: command not found
 Wed Oct 31 11:09:02 CST 2018
 ```
+
 3. 第三种：错误输出和正常输出互相覆盖
 ```
 root@mengalong:~/opdir/mengalong/t/t# bash test.sh >test.out 2>test.out

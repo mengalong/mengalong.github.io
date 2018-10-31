@@ -14,11 +14,12 @@ tags : [crontab,重定向]
 为了解决和解释这个问题，接下来我们先简单介绍下linux系统中重定向的问题
 
 # 概念
+
 Linux系统中:
 1: 表示标准输出(stdout)，默认输出到屏幕
 2:表示标准错误输出(stderr)，默认输出到屏幕
-
 在平时我们经常使用如下方法将脚本执行结果重定向：
+
 ```
 bash test.sh >test.out     //脚本的标准输出写入到文件test.out ,标准错误输出直接打印在屏幕 等价于：bash test.sh 1>test.out
 bash test.sh >test.out 2>&1 //标准输出和标准错误输出都写入到test.out并且不会互相覆盖，等价于 bash test.sh &>test.out

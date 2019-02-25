@@ -37,15 +37,14 @@ iterable -- 一个或者多个序列
 	1#2#3
 ```
 1. 将两个列表对位的元素相加，并返回新列表
-
 ```
-def add_list(x, y):
-    return x + y
-
-print map(add, [1,2,3], [4,5,6])
-
-结果为：
-[5, 7, 9]
+	def add_list(x, y):
+	    return x + y
+	
+	print map(add, [1,2,3], [4,5,6])
+	
+	结果为：
+	[5, 7, 9]
 ```
 
 # reduce 函数
@@ -64,12 +63,11 @@ iterable -- 列表或者可迭代对象
 
 1. 计算列表所有元素的和
 普通方法可以通过for循环遍历即可实现，用reduce只需要简单的一行
-
 ```
-def add(x, y):
-    return x + y
-print reduce(add, [1,2,3])
-
-结果为：
-6
+	def add(x, y):
+	    return x + y
+	print reduce(add, [1,2,3])
+	
+	结果为：
+	6
 ```

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Shell
-category : Linux,shell,bash
+title: Linux bash 输出进度条
+category : Shell
 tags : [Linux,shell]
 ---
 

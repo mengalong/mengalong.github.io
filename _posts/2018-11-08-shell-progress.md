@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Linux bash 输出进度条
+title: Shell
 category : Linux,shell,bash
 tags : [Linux,shell]
 ---

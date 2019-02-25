@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Nginx 配置https
-category : Linux,nginx,https
+category : Nginx
 tags : [https,nginx]
 ---
 

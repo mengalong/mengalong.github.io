@@ -25,17 +25,17 @@ Current Stack Size/Max 240K/8192K
 
 + 方法二：将testclient.c和原生代码分离，单独编译
     + 创建一个mytest的目录，将testclient.c拷贝进去
-    + 编写MakeFile，如下：
+    + 编写MakeFile，执行make编译即可
+
 ```c
 ESLPATH = /usr/local/src/freeswitch/libs/esl
 CFLAGS = -I$(ESLPATH)/src/include
 
 all: testclient.c
 	gcc $(CFLAGS) -o testclient testclient.c /usr/local/src/freeswitch/libs/esl/.libs/libesl.a
-```
-- 
-    + 执行make编译即可
-    
+``` 
+
+
 遇到的问题：
 
 1. esl编译依赖esl的静态链接库，因此在编译命令中需要指定/usr/local/src/freeswitch/libs/esl/.libs/libesl.a

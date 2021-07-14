@@ -26,7 +26,7 @@ Current Stack Size/Max 240K/8192K
 + 方法二：将testclient.c和原生代码分离，单独编译
     + 创建一个mytest的目录，将testclient.c拷贝进去
     + 编写MakeFile，如下：
- ```c
+```c
 ESLPATH = /usr/local/src/freeswitch/libs/esl
 CFLAGS = -I$(ESLPATH)/src/include
 

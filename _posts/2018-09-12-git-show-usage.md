@@ -52,3 +52,8 @@ mengalong@along-mac:~/code/git/bter/bter$ git log --pretty=oneline utils.py
 6a0e823b446a2e88adeec37bae11b45928e80f85 add conf parser and license header
 bc5e932862f25688c09f0c90df74d505efb5bcc3 init the bter demo
 ```
+
+# 6. 显示指定commit的修改内容
+```buildoutcfg
+git show <commit-id>
+```

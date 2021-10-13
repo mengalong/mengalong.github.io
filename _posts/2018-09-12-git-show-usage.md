@@ -57,3 +57,8 @@ bc5e932862f25688c09f0c90df74d505efb5bcc3 init the bter demo
 ```buildoutcfg
 git show <commit-id>
 ```
+
+# 7. 显示指定文件的历史修改内容
+```buildoutcfg
+git log -p <file-name>
+```

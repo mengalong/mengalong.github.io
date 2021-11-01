@@ -17,8 +17,6 @@ permalink: /about/
 
 * GitHub：[@mengalong](https://github.com/mengalong)
 * Email: alongmeng at gmail dot com
-* 博客：[{{ site.title }}]({{ site.url }})
-* 微博: [@mengalong](http://weibo.com/mengalong)
 * 知乎: [@mengalong](https://www.zhihu.com/people/meng-a-long)
 
 ## Skill Keywords
@@ -28,6 +26,3 @@ permalink: /about/
 * Python、Shell、Php、Perl
 * CI
 
-## 来源
-本博客Fork于[@mzlogin](https://github.com/mzlogin/mzlogin.github.io)
-向作者致谢

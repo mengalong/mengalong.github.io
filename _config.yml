@@ -1,8 +1,8 @@
 # ---------------- #
 #   Main Configs   #
 # ---------------- #
-baseurl:
-url: 
+baseurl:https://mengalong.github.io/
+url: https://mengalong.github.io/
 date_format: "ordinal"
 title: Mengalong
 subtitle: "人生在勤,不索何获"

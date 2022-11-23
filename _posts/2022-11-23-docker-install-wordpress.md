@@ -1,9 +1,12 @@
 ---
 layout: post
 title: Docker安装wordpress
-category : 读书
-tags : [侯世达,读书]
+category : Linux
+tags : [docker, wordpress]
 ---
+
+背景：使用docker镜像启动wordpress，并进行基本的配置和初始化
+
 1. 下载镜像：
 ```commandline
 docker pull mysql

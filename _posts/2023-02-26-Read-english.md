@@ -5,7 +5,7 @@ category : 读书
 tags : [英语,共读]
 ---
 
-![](/images/posts/english_read/english-read.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200)
+![](/images/posts/english_read/english-read.jpeg){:height="400px" width="300px"}
 
 这是一本介绍英语共读的书，最近在读书群里看到有人推荐，从介绍上来看应该可以解决我如何学习英语以及如何帮助孩子学习
 英文的疑问。

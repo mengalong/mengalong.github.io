@@ -1,7 +1,7 @@
 ---
 layout: post
 title: FreeSwitch ESL 编译
-category : C
+category : 编程
 tags : [FreeSwitch]
 ---
 FreeSwitch ESL 库单独编译

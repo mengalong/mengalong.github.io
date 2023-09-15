@@ -1,7 +1,7 @@
 ---
 layout: post
 title: promise和callback在微信小程序异步调用中的应用
-category : Linux
+category : 编程
 tags : [小程序,promise,callback,javascript]
 ---
 

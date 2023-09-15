@@ -1,7 +1,7 @@
 ---
 layout: post
 title: git 查看指定commit修改的文件列表
-category : Linux
+category : 编程
 tags : [Git]
 ---
 

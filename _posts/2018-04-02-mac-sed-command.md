@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mac下sed -i参数的使用方法
-category : Linux
+category : 系统应用
 tags : [Linux]
 ---
 

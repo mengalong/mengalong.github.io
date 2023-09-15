@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux/Mac/Windows 文件换行符转换
-category : Linux
+category : 系统应用
 tags : [Linux]
 ---
 Linux/Mac/Windows 文件换行符转换

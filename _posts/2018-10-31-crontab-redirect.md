@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux crontab 输出重定向不生效问题解决
-category : Linux
+category : 系统应用
 tags : [crontab,重定向]
 ---
 # 问题

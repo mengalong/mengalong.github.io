@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 俄狄浦斯在科罗诺斯
-category : 希腊神话
+category : 读书
 tags : [神话]
 ---
 

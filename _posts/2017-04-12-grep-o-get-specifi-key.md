@@ -1,7 +1,7 @@
 ---
 layout: post
 title: grep获取文件中指定key的内容
-category : Linux
+category : 系统应用
 tags : [Linux, grep]
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Nginx 配置https
-category : Nginx
+category : 编程
 tags : [https,nginx]
 ---
 

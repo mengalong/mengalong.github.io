@@ -1,7 +1,7 @@
 ---
 layout: post
 title: FreeSwitch event_socket connection refused
-category : C
+category : 编程
 tags : [FreeSwitch]
 ---
 FreeSwitch event_socket connection refused

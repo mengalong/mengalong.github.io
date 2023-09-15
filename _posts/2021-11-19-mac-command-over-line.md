@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mac终端输入换行问题解决
-category : Linux
+category : 系统应用
 tags : [Linux]
 ---
 

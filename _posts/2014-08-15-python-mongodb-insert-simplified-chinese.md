@@ -1,7 +1,7 @@
 ---
 layout: post
 title: mongodb中如何插入简体中文
-category : Python
+category : 编程
 tagline: "tag line"
 tags : [python,json]
 ---

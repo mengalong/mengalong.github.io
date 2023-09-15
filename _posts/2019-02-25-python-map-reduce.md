@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python map、reduce函数用法
-category : Python
+category : 编程
 tags : [Linux,Python]
 ---
 

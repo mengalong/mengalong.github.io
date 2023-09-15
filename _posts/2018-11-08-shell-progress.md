@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux bash 输出进度条
-category : Shell
+category : 编程
 tags : [Linux,shell]
 ---
 

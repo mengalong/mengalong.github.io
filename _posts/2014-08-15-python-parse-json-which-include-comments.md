@@ -1,7 +1,7 @@
 ---
 layout: post
 title: python 解析包含注释的json文件
-category : Python
+category : 编程
 tagline: "tag line"
 tags : [python,json]
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: GDB list无法查看代码
-category : C
+category : 编程
 tags : [FreeSwitch]
 ---
 GDB list无法查看代码

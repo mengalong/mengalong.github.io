@@ -1,7 +1,7 @@
 ---
 layout: post
 title: git log 显示颜色
-category : Linux
+category : 系统应用
 tags : [Git]
 ---
 

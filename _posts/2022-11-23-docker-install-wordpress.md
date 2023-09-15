@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Docker安装wordpress
-category : Linux
+category : 系统应用
 tags : [docker, wordpress]
 ---
 

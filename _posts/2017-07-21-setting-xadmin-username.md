@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Django 使用xadmin时设置初始后台用户名密码
-category : Python
+category : 编程
 tags : [Python, Django]
 ---
 

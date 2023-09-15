@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Nginx 设置rewrite规则
-category : Nginx
+category : 编程
 tags : [Nginx]
 ---
 

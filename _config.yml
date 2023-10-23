@@ -104,8 +104,8 @@ gitment:
 gitalk:
     owner: mengalong
     repo: blog-comments
-	clientID: aa36e8c2b18f9fd2149c
-	clientSecret: 801045c48eb4d62f4539b4184c83c45509a6470a
+    clientID: aa36e8c2b18f9fd2149c
+    clientSecret: 801045c48eb4d62f4539b4184c83c45509a6470a
     #clientID: 3240a5b831da711d5b1d
     #clientSecret: eeb0f32703c8347018c51b058b61d5a48da70d1a
 # 在使用其它评论组件时可点击显示 Disqus

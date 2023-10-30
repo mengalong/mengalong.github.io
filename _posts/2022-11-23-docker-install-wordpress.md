@@ -27,8 +27,9 @@ docker run -d --name wordpress \
 ```commandline
 docker inspect mysql-wp | grep -i ipaddr
 ```
+
 5. mysql容器启动之后，根据上文指定的root账户和密码连接到mysql,手动创建wordpress数据库
-```commandline
+```python
 docker exec -it mysql-wp bash
 mysql -u root -p${mysqlpassword}
 

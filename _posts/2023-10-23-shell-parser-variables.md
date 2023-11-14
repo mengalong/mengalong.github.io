@@ -9,6 +9,8 @@ tags : [Shell]
 
 在 shell 脚本中，经常有变量截取的各种处理需求,下面给出一些常见的字符串截取操作办法。
 
+# 举例
+
 1. 从头截取指定某几个字符
 ```commandline
 variable="Hello, World"
